@@ -1,21 +1,20 @@
 package kodlamaio.hrms.core.utilities.adapters;
-import java.time.LocalDate;
+import org.springframework.stereotype.Service;
+
+import kodlamaio.hrms.entities.concretes.Candidate;
 import kodlamaio.hrms.mernis.FakeMernisService;
 
+@Service
 public class MernisServiceAdapter implements ValidationService{
 
+	FakeMernisService FakeMernisService = new FakeMernisService();
+	
 	@Override
-	public boolean mernisValidate(String nationalIdentity, String firstName, String lastName, LocalDate dateOfBirth) {
-
-		FakeMernisService person = new FakeMernisService();
+	public boolean mernisValidate(Candidate candidate) {
 		
-		boolean result = true;
-		try {
-				result = person.checkIfRealPerson(nationalIdentity, firstName, lastName, dateOfBirth);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
+		FakeMernisService client = new FakeMernisService();
+		return client.mernisValidate(candidate);
+		
 	}	
 
 }

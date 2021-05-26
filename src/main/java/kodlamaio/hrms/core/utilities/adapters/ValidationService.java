@@ -1,8 +1,7 @@
 package kodlamaio.hrms.core.utilities.adapters;
-
-import java.time.LocalDate;
+import kodlamaio.hrms.entities.concretes.Candidate;
 
 public interface ValidationService {
 	
-	boolean mernisValidate(String nationalIdentity,String firstName, String lastName, LocalDate dateOfBirth);
+	boolean mernisValidate(Candidate candidate);
 }
