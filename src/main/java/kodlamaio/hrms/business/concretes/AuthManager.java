@@ -122,7 +122,7 @@ public class AuthManager implements AuthService{
 		
 		return false;
 	}
-	
+	// mernis kullanıcı vatandaşlık doğrulama 
 	public boolean checkIfRealPerson(Candidate candidate) {
 		
 		if (validationService.mernisValidate(candidate)) {
@@ -131,8 +131,10 @@ public class AuthManager implements AuthService{
 		}
 		
 		return false;
+	
 	}
 	
+	// tc kimlik önceden kayıtlı mı
 	private boolean checkIfNationalIdExist(String nationalIdentity) {
 		
 		if (candidateService.findCandidateByNationalIdentity(nationalIdentity).getData() == null) {
@@ -142,7 +144,7 @@ public class AuthManager implements AuthService{
 		
 		return false;
 	}
-	
+	// kullanıcı boş alan bırakmış mı
 	private boolean checkEmployerMissingInfo(Employer employer) {
 		
 		if (employer.getEmail() != null && employer.getWebAdress() != null && employer.getCompanyName() != null

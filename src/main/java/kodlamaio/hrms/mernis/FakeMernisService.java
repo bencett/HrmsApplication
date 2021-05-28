@@ -6,12 +6,17 @@ public class FakeMernisService implements ValidationService{
 
 	@Override
 	public boolean mernisValidate(Candidate candidate) {
-		if (candidate.getNationalIdentity()=="27215594094" && candidate.getFirstName()=="Çetin" && 
-				candidate.getLastName()== "Ürün" && candidate.getDateOfBirth().getYear()==1999) {
+		
+
+		if(candidate.getNationalIdentity()=="92222222222" && 
+				candidate.getFirstName()=="Denebir" && 
+				candidate.getLastName()== "Denebirsoyad" && 
+				candidate.getDateOfBirth().getYear()==1962) {
+			
 			return true;
 		}
+		
 		return false;
 	}
-	
 	
 }

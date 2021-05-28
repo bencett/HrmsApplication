@@ -13,7 +13,13 @@ public class MernisServiceAdapter implements ValidationService{
 	public boolean mernisValidate(Candidate candidate) {
 		
 		FakeMernisService client = new FakeMernisService();
-		return client.mernisValidate(candidate);
+		
+		if (client.mernisValidate(candidate)) {
+			
+			return true;
+		}
+		
+		return false;
 		
 	}	
 

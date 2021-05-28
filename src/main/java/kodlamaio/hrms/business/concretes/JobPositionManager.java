@@ -39,10 +39,4 @@ public class JobPositionManager implements JobPositionService{
 		return new SuccessResult("İş pozisyonları eklendi.");
 	}
 
-	//@Override
-	//public DataResult<JobPosition> getByJobName(String title) {
-		
-	//	return new SuccessDataResult<JobPosition>(this.jobPositionDao.getByJobName(title));
-	//}
-
 }
