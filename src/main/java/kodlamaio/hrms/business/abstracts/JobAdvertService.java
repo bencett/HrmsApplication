@@ -9,7 +9,11 @@ public interface JobAdvertService {
 	
 	Result add(JobAdvert jobAdvert);
 	
-	Result changeActive(JobAdvert jobAdvert);
+	Result update(JobAdvert jobAdvert);
+	
+	DataResult<JobAdvert> getById(int id);
+	
+	Result closeAdvert(int id);
 	
 	DataResult<List<JobAdvert>> getAllActiveAdverts();
 	

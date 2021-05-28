@@ -1,17 +1,17 @@
 package kodlamaio.hrms.business.concretes;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 import kodlamaio.hrms.business.abstracts.JobAdvertService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertDao;
 import kodlamaio.hrms.entities.concretes.JobAdvert;
 
+@Service
 public class JobAdvertManager implements JobAdvertService{
 
 	private JobAdvertDao jobAdvertDao;
@@ -29,12 +29,43 @@ public class JobAdvertManager implements JobAdvertService{
 		return new SuccessResult("İş ilanı eklendi.");
 		
 	}
-
+	
 	@Override
-	public Result changeActive(JobAdvert jobAdvert) {
+	public Result update(JobAdvert jobAdvert) {
+		this.jobAdvertDao.save(jobAdvert);
+		return new SuccessResult("İş ilanı güncellendi.");
+	}
+	
+	@Override
+	public DataResult<JobAdvert> getById(int id){
+		
+		return new SuccessDataResult<JobAdvert>(this.jobAdvertDao.getOne(id));
+	}
 
-		this.changeActive(jobAdvert);
-		return new SuccessResult("İş ilanı aktivitesi değiştirildi.");
+	//girilen id ile ilanı buluyor ve aktif mi değil mi kontrol ediyor
+	//ve duruma göre aktifleştirip pasifleştiebiliyoruz
+	//ilerleyen zamanlarda ilan ismi ile de kontrol sağlanabilir
+	@Override
+	public Result closeAdvert(int id) {
+		
+		if (getById(id)==null) {
+			
+			return new ErrorResult("Böyle bir iş ilanı yok.");
+		}
+		
+		if (getById(id).getData().isActive()==false) {
+			
+			return new ErrorResult("Bu ilan zaten kapalı.");
+		}
+		
+		/*ilan aktiflik field'ını değil setter'ını çağıracaksınız 
+		 *(örn. isActive'nin setActive setter'ı)*/
+		
+		getById(id).getData().setActive(false);
+		
+		return new SuccessResult("İş ilanı pasif hale getirildi.");
+		
+		
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import kodlamaio.hrms.entities.concretes.Employer;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthsController {
+	
 	private AuthService authService;
 
 	@Autowired
