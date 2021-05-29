@@ -17,5 +17,5 @@ public interface JobAdvertService {
 	
 	DataResult<List<JobAdvert>> getAllActiveAdverts();
 	
-	DataResult<List<JobAdvert>> getAllByOrderByReleaseDate();
+	DataResult<List<JobAdvert>> getAllByReleaseDate();
 }

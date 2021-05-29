@@ -1,12 +1,11 @@
 package kodlamaio.hrms.api.controllers;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import kodlamaio.hrms.business.abstracts.JobAdvertService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
@@ -38,13 +37,13 @@ public class JobAdvertsController {
 	}
 	
 	@GetMapping("/getbyid")
-	public Result add(@PathVariable("id") int id) {
+	public DataResult<JobAdvert> getById(@RequestParam int id) {
 		
 		return this.jobAdvertService.getById(id);
 	}
 	
 	@PostMapping("/closeAdvert")
-	public Result closeAdvert(int id) {
+	public Result closeAdvert(@RequestParam int id) {
 		
 		return this.jobAdvertService.closeAdvert(id);
 	}
@@ -55,10 +54,10 @@ public class JobAdvertsController {
 		return this.jobAdvertService.getAllActiveAdverts();
 	}
 	
-	@GetMapping("/getAllByOrderByReleaseDate")
-	public DataResult<List<JobAdvert>> getAllByOrderByReleaseDate() {
+	@GetMapping("/getAllByReleaseDate")
+	public DataResult<List<JobAdvert>> getAllByReleaseDate() {
 		
-		return this.jobAdvertService.getAllByOrderByReleaseDate();
+		return this.jobAdvertService.getAllByReleaseDate();
 	}
 	
 }

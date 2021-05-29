@@ -11,6 +11,6 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer>{
 	List<JobAdvert> getAllActiveAdverts();
 	
 	@Query("From JobAdvert where isActive = true Order By releaseDate")
-	List<JobAdvert> getAllByOrderByReleaseDate();
+	List<JobAdvert> getAllByReleaseDate();
 	
 }

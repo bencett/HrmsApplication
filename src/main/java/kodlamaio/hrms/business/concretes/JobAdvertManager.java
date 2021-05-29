@@ -32,6 +32,7 @@ public class JobAdvertManager implements JobAdvertService{
 	
 	@Override
 	public Result update(JobAdvert jobAdvert) {
+		
 		this.jobAdvertDao.save(jobAdvert);
 		return new SuccessResult("İş ilanı güncellendi.");
 	}
@@ -39,7 +40,7 @@ public class JobAdvertManager implements JobAdvertService{
 	@Override
 	public DataResult<JobAdvert> getById(int id){
 		
-		return new SuccessDataResult<JobAdvert>(this.jobAdvertDao.getOne(id));
+		return new SuccessDataResult<JobAdvert>(this.jobAdvertDao.findById(id).get());
 	}
 
 	//girilen id ile ilanı buluyor ve aktif mi değil mi kontrol ediyor
@@ -61,11 +62,14 @@ public class JobAdvertManager implements JobAdvertService{
 		/*ilan aktiflik field'ını değil setter'ını çağıracaksınız 
 		 *(örn. isActive'nin setActive setter'ı)*/
 		
-		getById(id).getData().setActive(false);
+		JobAdvert advertToClose = getById(id).getData();
+		
+		advertToClose.setActive(false);
+		
+		add(advertToClose);
 		
 		return new SuccessResult("İş ilanı pasif hale getirildi.");
-		
-		
+			
 	}
 
 	@Override
@@ -75,10 +79,10 @@ public class JobAdvertManager implements JobAdvertService{
 	}
 
 	@Override
-	public DataResult<List<JobAdvert>> getAllByOrderByReleaseDate() {
+	public DataResult<List<JobAdvert>> getAllByReleaseDate() {
 
 		return new SuccessDataResult<List<JobAdvert>>
-		(this.jobAdvertDao.getAllByOrderByReleaseDate(),"İş ilanları tarihe göre listelendi.");
+		(this.jobAdvertDao.getAllByReleaseDate(),"İş ilanları tarihe göre listelendi.");
 	}
 
 }

@@ -15,12 +15,12 @@ public class EmployeeManager implements EmployeeService{
 	
 	@Autowired
 	public EmployeeManager(EmployeeDao employeeDao) {
-		super();
+
 		this.employeeDao = employeeDao;
 	}
 	
 	@Override
-	public DataResult<List<Employee>>  getAll() {
+	public DataResult<List<Employee>> getAll() {
 		
 		return new SuccessDataResult<List<Employee>>
 		(employeeDao.findAll(),"Personeller listelendi.");
