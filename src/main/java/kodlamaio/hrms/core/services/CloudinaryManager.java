@@ -16,12 +16,12 @@ public class CloudinaryManager implements CloudinaryService{
 	private Cloudinary cloudinary;
 	
 	@Autowired
-	public CloudinaryManager(Cloudinary cloudinary) {
+	public CloudinaryManager() {
 		super();
 		this.cloudinary = new Cloudinary(ObjectUtils.asMap(
 				"cloud_name", "bencet", 
 				"api_key", "971185531595988",
-				"api_secret", "MohSjeXz0IAhptpNPLFXQk5upt0"));;
+				"api_secret", "MohSjeXz0IAhptpNPLFXQk5upt0"));
 	}
 
 	@SuppressWarnings("rawtypes")
