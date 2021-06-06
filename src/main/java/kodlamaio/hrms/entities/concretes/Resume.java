@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "resumes")
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({ "hibernateLazyInitilazier", "handler" })
 public class Resume {
 	
 	@Id
@@ -23,7 +27,7 @@ public class Resume {
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "education_id")
+	/*@Column(name = "education_id")
 	private int educationId;
 	
 	@Column(name = "job_experience_id")
@@ -35,18 +39,18 @@ public class Resume {
 	@Column(name = "language_id")
 	private int languageId;
 	
+	@Column(name = "image_id")
+	private int imageId;*/
+	
 	@Column(name = "github_link")
 	private String gitHubLink;
 	
 	@Column(name = "linkedin_link")
 	private String linkedInLink;
 	
-	@Column(name = "image_id")
-	private int imageId;
-	
 	@Column(name = "cover_letter")
 	private String coverLetter;
-	
+		
 		@OneToMany(mappedBy = "resume")
 		private List<Language> languages;
 		

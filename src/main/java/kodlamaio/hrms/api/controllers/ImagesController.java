@@ -5,11 +5,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import kodlamaio.hrms.business.abstracts.ImageService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Image;
+import kodlamaio.hrms.entities.concretes.Resume;
 
 @RestController
 @RequestMapping("/api/images")
@@ -29,8 +33,12 @@ public class ImagesController {
 	}
 
 	@PostMapping("/add")
-	public Result add(@RequestBody Image image) {
+	public Result add(@RequestParam int id, @RequestBody MultipartFile image) {
 		
-		return this.imageService.add(image);
+		Resume resume = new Resume();
+		Image photo = new Image();
+		resume.setId(id);
+		photo.setResume(resume);
+		return this.imageService.add(photo, image);
 	}
 }
